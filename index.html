@@ -8,94 +8,107 @@
 </head>
 <body>
 
-    <!-- Header Section -->
     <header>
         <h1>SHINOBI DATABASE</h1>
         <p>Search for Characters, Jutsus, Clans, or Arcs</p>
     </header>
 
-    <!-- Search Section -->
     <div class="search-container">
         <input type="text" id="searchInput" placeholder="Search (e.g., Itachi, Rasengan, Uchiha)..." onkeyup="searchDatabase()">
     </div>
 
-    <!-- Results Grid -->
-    <main class="database-grid" id="databaseGrid">
-        
-        <!-- Card 1: Character -->
-        <div class="card" data-name="naruto uzumaki" data-type="character">
-            <span class="badge character">Character</span>
-            <h3>Naruto Uzumaki</h3>
-            <p><strong>Clan:</strong> Uzumaki</p>
-            <p><strong>Signature Jutsu:</strong> Rasengan, Shadow Clone</p>
-        </div>
+    <main class="database-grid" id="databaseGrid"></main>
 
-        <!-- Card 2: Character -->
-        <div class="card" data-name="itachi uchiha" data-type="character">
-            <span class="badge character">Character</span>
-            <h3>Itachi Uchiha</h3>
-            <p><strong>Clan:</strong> Uchiha</p>
-            <p><strong>Signature Jutsu:</strong> Amaterasu, Tsukuyomi</p>
-        </div>
-
-        <!-- Card 3: Jutsu -->
-        <div class="card" data-name="chidori" data-type="jutsu">
-            <span class="badge jutsu">Jutsu</span>
-            <h3>Chidori</h3>
-            <p><strong>Type:</strong> Lightning Style</p>
-            <p><strong>Users:</strong> Kakashi, Sasuke</p>
-        </div>
-
-        <!-- Card 4: Clan -->
-        <div class="card" data-name="hyuga clan" data-type="clan">
-            <span class="badge clan">Clan</span>
-            <h3>Hyuga Clan</h3>
-            <p><strong>Kekkei Genkai:</strong> Byakugan</p>
-            <p><strong>Village:</strong> Hidden Leaf</p>
-        </div>
-
-        <!-- Card 5: Arc -->
-        <div class="card" data-name="pain assault arc shippuden" data-type="arc">
-            <span class="badge arc">Arc</span>
-            <h3>Pain's Assault Arc</h3>
-            <p><strong>Episodes:</strong> 152-175 (Shippuden)</p>
-            <p><strong>Status:</strong> Canon</p>
-        </div>
-
-    </main>
-
-    <!-- No Results Message -->
     <div id="noResult" class="hidden">No match found in the archives.</div>
 
-    <!-- JavaScript for Instant Search -->
     <script>
-        function searchDatabase() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.getElementsByClassName('card');
-            let grid = document.getElementById('databaseGrid');
-            let noResult = document.getElementById('noResult');
-            let hasResults = false;
-
-            for (let i = 0; i < cards.length; i++) {
-                let name = cards[i].getAttribute('data-name');
-                let type = cards[i].getAttribute('data-type');
-                
-                // Agar search input card ke naam ya type se match kare
-                if (name.includes(input) || type.includes(input)) {
-                    cards[i].style.display = "block";
-                    hasResults = true;
-                } else {
-                    cards[i].style.display = "none";
-                }
+        // 1. Yahan humara saara data ek jagah structured hai
+        const shinobiData = [
+            { 
+                name: "Naruto Uzumaki", 
+                badgeText: "Character", 
+                badgeClass: "character", 
+                attribute1: "Clan: Uzumaki", 
+                attribute2: "Jutsu: Rasengan" 
+            },
+            { 
+                name: "Itachi Uchiha", 
+                badgeText: "Character", 
+                badgeClass: "character", 
+                attribute1: "Clan: Uchiha", 
+                attribute2: "Jutsu: Tsukuyomi" 
+            },
+            { 
+                name: "Sasuke Uchiha", 
+                badgeText: "Character", 
+                badgeClass: "character", 
+                attribute1: "Clan: Uchiha", 
+                attribute2: "Jutsu: Chidori" 
+            },
+            { 
+                name: "Edo Tensei", 
+                badgeText: "Jutsu", 
+                badgeClass: "jutsu", 
+                attribute1: "Type: Forbidden", 
+                attribute2: "Creator: Tobirama" 
+            },
+            { 
+                name: "Uchiha Clan", 
+                badgeText: "Clan", 
+                badgeClass: "clan", 
+                attribute1: "Dojutsu: Sharingan", 
+                attribute2: "Status: Mostly Deceased" 
+            },
+            { 
+                name: "Chunin Exams Arc", 
+                badgeText: "Arc", 
+                badgeClass: "arc", 
+                attribute1: "Episodes: 20-67", 
+                attribute2: "Status: Canon" 
             }
+        ];
 
-            // Agar kuch na mile toh message dikhao
-            if (hasResults) {
-                noResult.classList.add('hidden');
-            } else {
+        const grid = document.getElementById('databaseGrid');
+        const noResult = document.getElementById('noResult');
+
+        // 2. Yeh function data padhkar HTML cards banata hai
+        function displayCards(data) {
+            grid.innerHTML = ""; // Pehle grid ko clear karo
+            
+            if (data.length === 0) {
                 noResult.classList.remove('hidden');
+            } else {
+                noResult.classList.add('hidden');
+                
+                data.forEach(item => {
+                    // Har item ke liye ek card create karo
+                    let cardHTML = `
+                        <div class="card">
+                            <span class="badge ${item.badgeClass}">${item.badgeText}</span>
+                            <h3>${item.name}</h3>
+                            <p><strong>${item.attribute1.split(':')[0]}:</strong> ${item.attribute1.split(':')[1]}</p>
+                            <p><strong>${item.attribute2.split(':')[0]}:</strong> ${item.attribute2.split(':')[1]}</p>
+                        </div>
+                    `;
+                    grid.innerHTML += cardHTML; // Card ko grid mein daal do
+                });
             }
         }
+
+        // 3. Yeh function search input ke hisaab se data filter karta hai
+        function searchDatabase() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            
+            // Data filter karo agar name ya type mein input match ho
+            let filteredData = shinobiData.filter(item => {
+                return item.name.toLowerCase().includes(input) || item.badgeText.toLowerCase().includes(input);
+            });
+
+            displayCards(filteredData);
+        }
+
+        // Website load hote hi saare cards dikhane ke liye function call
+        displayCards(shinobiData);
     </script>
 </body>
 </html>
