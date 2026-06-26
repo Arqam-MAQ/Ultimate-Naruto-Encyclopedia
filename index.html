@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shinobi Database - Search</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>SHINOBI DATABASE</h1>
+        <p>Search for Characters, Jutsus, Clans, or Arcs</p>
+    </header>
+
+    <!-- Search Section -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search (e.g., Itachi, Rasengan, Uchiha)..." onkeyup="searchDatabase()">
+    </div>
+
+    <!-- Results Grid -->
+    <main class="database-grid" id="databaseGrid">
+        
+        <!-- Card 1: Character -->
+        <div class="card" data-name="naruto uzumaki" data-type="character">
+            <span class="badge character">Character</span>
+            <h3>Naruto Uzumaki</h3>
+            <p><strong>Clan:</strong> Uzumaki</p>
+            <p><strong>Signature Jutsu:</strong> Rasengan, Shadow Clone</p>
+        </div>
+
+        <!-- Card 2: Character -->
+        <div class="card" data-name="itachi uchiha" data-type="character">
+            <span class="badge character">Character</span>
+            <h3>Itachi Uchiha</h3>
+            <p><strong>Clan:</strong> Uchiha</p>
+            <p><strong>Signature Jutsu:</strong> Amaterasu, Tsukuyomi</p>
+        </div>
+
+        <!-- Card 3: Jutsu -->
+        <div class="card" data-name="chidori" data-type="jutsu">
+            <span class="badge jutsu">Jutsu</span>
+            <h3>Chidori</h3>
+            <p><strong>Type:</strong> Lightning Style</p>
+            <p><strong>Users:</strong> Kakashi, Sasuke</p>
+        </div>
+
+        <!-- Card 4: Clan -->
+        <div class="card" data-name="hyuga clan" data-type="clan">
+            <span class="badge clan">Clan</span>
+            <h3>Hyuga Clan</h3>
+            <p><strong>Kekkei Genkai:</strong> Byakugan</p>
+            <p><strong>Village:</strong> Hidden Leaf</p>
+        </div>
+
+        <!-- Card 5: Arc -->
+        <div class="card" data-name="pain assault arc shippuden" data-type="arc">
+            <span class="badge arc">Arc</span>
+            <h3>Pain's Assault Arc</h3>
+            <p><strong>Episodes:</strong> 152-175 (Shippuden)</p>
+            <p><strong>Status:</strong> Canon</p>
+        </div>
+
+    </main>
+
+    <!-- No Results Message -->
+    <div id="noResult" class="hidden">No match found in the archives.</div>
+
+    <!-- JavaScript for Instant Search -->
+    <script>
+        function searchDatabase() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+            let grid = document.getElementById('databaseGrid');
+            let noResult = document.getElementById('noResult');
+            let hasResults = false;
+
+            for (let i = 0; i < cards.length; i++) {
+                let name = cards[i].getAttribute('data-name');
+                let type = cards[i].getAttribute('data-type');
+                
+                // Agar search input card ke naam ya type se match kare
+                if (name.includes(input) || type.includes(input)) {
+                    cards[i].style.display = "block";
+                    hasResults = true;
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+
+            // Agar kuch na mile toh message dikhao
+            if (hasResults) {
+                noResult.classList.add('hidden');
+            } else {
+                noResult.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
