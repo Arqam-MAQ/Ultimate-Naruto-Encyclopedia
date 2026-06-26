@@ -115,3 +115,12 @@ header p {
 .hidden {
     display: none;
 }
+/* Card Images Styling */
+.card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid #2d2d34;
+}
