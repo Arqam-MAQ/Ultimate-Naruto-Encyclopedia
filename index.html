@@ -29,23 +29,27 @@
                 badgeText: "Character", 
                 badgeClass: "character", 
                 attribute1: "Clan: Uzumaki", 
-                attribute2: "Jutsu: Rasengan" 
+                attribute2: "Jutsu: Rasengan",
+                image: "https://media.giphy.com/media/xT1XGz74gvhFAOWpbO/giphy.gif" // Image link add kiya
             },
             { 
                 name: "Itachi Uchiha", 
                 badgeText: "Character", 
                 badgeClass: "character", 
                 attribute1: "Clan: Uchiha", 
-                attribute2: "Jutsu: Tsukuyomi" 
+                attribute2: "Jutsu: Tsukuyomi",
+                image: "https://media.giphy.com/media/2y98KScHKeaQM/giphy.gif"
             },
             { 
                 name: "Sasuke Uchiha", 
                 badgeText: "Character", 
                 badgeClass: "character", 
                 attribute1: "Clan: Uchiha", 
-                attribute2: "Jutsu: Chidori" 
-            },
-            { 
+                attribute2: "Jutsu: Chidori",
+                image: "https://media.giphy.com/media/VbchLDeAmZrsQ/giphy.gif"
+            }
+            // Baaki items (Edo Tensei, Uchiha Clan, etc.) mein bhi aise hi 'image: "link"' add kar sakte ho
+        ];            { 
                 name: "Edo Tensei", 
                 badgeText: "Jutsu", 
                 badgeClass: "jutsu", 
@@ -84,16 +88,13 @@
                     // Har item ke liye ek card create karo
                     let cardHTML = `
                         <div class="card">
+                            <img src="${item.image}" alt="${item.name}" class="card-image">
                             <span class="badge ${item.badgeClass}">${item.badgeText}</span>
                             <h3>${item.name}</h3>
                             <p><strong>${item.attribute1.split(':')[0]}:</strong> ${item.attribute1.split(':')[1]}</p>
                             <p><strong>${item.attribute2.split(':')[0]}:</strong> ${item.attribute2.split(':')[1]}</p>
                         </div>
                     `;
-                    grid.innerHTML += cardHTML; // Card ko grid mein daal do
-                });
-            }
-        }
 
         // 3. Yeh function search input ke hisaab se data filter karta hai
         function searchDatabase() {
