@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0b0b0c;
+    color: #e2e8f0;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #ff3e3e;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 62, 62, 0.4);
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: #8a8f98;
+}
+
+/* Search Bar styling */
+.search-container {
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    background-color: #16161a;
+    border: 2px solid #2d2d34;
+    border-radius: 8px;
+    color: #fff;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: #ff3e3e;
+    box-shadow: 0 0 15px rgba(255, 62, 62, 0.2);
+}
+
+/* Cards Grid */
+.database-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Individual Card */
+.card {
+    background-color: #16161a;
+    border: 1px solid #2d2d34;
+    border-radius: 10px;
+    padding: 1.5rem;
+    position: relative;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #ff3e3e;
+}
+
+.card h3 {
+    margin: 0.8rem 0 0.5rem 0;
+    color: #fff;
+}
+
+.card p {
+    font-size: 0.9rem;
+    color: #a0aec0;
+    margin-bottom: 0.3rem;
+}
+
+.card strong {
+    color: #ff3e3e;
+}
+
+/* Badges for types */
+.badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.character { background-color: #2b6cb0; color: #fff; }
+.jutsu { background-color: #b7791f; color: #fff; }
+.clan { background-color: #2f855a; color: #fff; }
+.arc { background-color: #6b46c1; color: #fff; }
+
+/* No Results styling */
+#noResult {
+    text-align: center;
+    color: #ff3e3e;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+}
+
+.hidden {
+    display: none;
+}
